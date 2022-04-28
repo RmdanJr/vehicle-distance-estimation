@@ -1,10 +1,8 @@
 # Graduation-Project
 
-## Related Work
 ---
 ## Related Work
-
-## The current solutions and their shortcoming
+The current solutions and their shortcoming
 ---
 
 ## 1. Speed Estimation, and Classification System Based on Virtual Detection Zone and YOLO
