@@ -8,7 +8,7 @@ for more details [the project text documentaion](https://docs.google.com/documen
 ![sample of thermal object detection](https://user-images.githubusercontent.com/47370980/172619765-3ab6f4b2-49cd-41ad-a245-3ae385aa59b7.png)
 
 we used YOLOv5 on the detecton YOLOv5 rocket is a family of object detection architectures and models pretrained on the COCO dataset.
-you can visit the forma docs [here](https://docs.ultralytics.com/#yolov5).
+you can visit the formal docs [here](https://docs.ultralytics.com/#yolov5).
 we have made some modifications on YOLOv5 to be applicaple with our own dataset.
 
 first of all you need to dounload YOLOv5 and install the initial requirements.
@@ -31,7 +31,17 @@ gdown --id 1-4gQP0YzFkkYCZoCaIokl9eM94TaiVAu
 ```
 !python train.py --epochs 5 --data dataset.yaml --cfg yolov5s.yaml --weights weightsFile
 ```
+
+then if you need to detect the images/videoes all what you can do is whriting the upcomming command.
+#### note that
+***weights*** is whare is the  file of the best weights after the training proccess happen.
+
+***source*** is the images path or specified videoes link or path
+```
+python detect.py --save-txt --weights /content/best.pt --conf 0.4 --source 'https://youtu.be/CvI5nvUdbsM'
+```
 ### 2.2 distance estimation
+
 ### 2.3 speed estimation
 
 ## 3. conclusion
