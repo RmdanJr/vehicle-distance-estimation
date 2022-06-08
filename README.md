@@ -41,6 +41,22 @@ then if you need to detect the images/videoes all what you can do is whriting th
 python detect.py --save-txt --weights /content/best.pt --conf 0.4 --source 'https://youtu.be/CvI5nvUdbsM'
 ```
 ### 2.2 distance estimation
+To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  all what you need is 
+
+## Training
+1. (Optional) Use ```hyperopti.py``` for hyperparameter optimization. Choose the hyperparameters you would like to try out.
+2. You can use result of 1. and edit ```train.py``` accordingly. Otherwise, use ```train.py``` to define your own model, choose hyperparameters, and start training!
+### Inference
+1. Use ```inference.py``` to generate predictions for the test set.
+```
+python inference.py --modelname=models/model@1535470106.json --weights=models/model@1535470106.h5
+
+```
+2. Use ```visualizer.py``` to visualize the predictions.
+```
+cd distance-estimator/
+python visualizer.py
+```
 
 ### 2.3 speed estimation
 
