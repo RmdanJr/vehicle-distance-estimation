@@ -99,7 +99,6 @@ The sheet is expected to have a row for each frame & a column for each category.
 
 ```
 !python display-examples.py
-
 ```
 
 #### Results
@@ -115,21 +114,96 @@ img = cv2.imread('training-results/results.png', 1)
 plt.imshow(img)
 plt.axis('off')
 ```
-### 2.2 distance estimation
-To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  all what you need is 
+### 2.2 Distance Estimation
+To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  
 
-### Training
-1. (Optional) Use ```hyperopti.py``` for hyperparameter optimization. Choose the hyperparameters you would like to try out.
-2. You can use result of 1. and edit ```train.py``` accordingly. Otherwise, use ```train.py``` to define your own model, choose hyperparameters, and start training!
-### Inference
-1. Use ```inference.py``` to generate predictions for the test set.
+first you need to 
+
+#### Cloning Repo
+
 ```
-python inference.py --modelname=models/model@1535470106.json --weights=models/model@1535470106.h5
+!git clone https://github.com/RmdanJr/vehicle-distance-estimation.git
 ```
-2. Use ```visualizer.py``` to visualize the predictions.
+
+then you must be inside the ```distance-estimator```
+
 ```
-cd distance-estimator/
-python visualizer.py
+%cd vehicle-distance-estimation/distance-estimator/
+```
+
+#### Packages & Setup
+
+installing the initial requirements.
+
+```
+!pip install -r requirements.txt
+```
+
+#### KITTI Dataset
+Download Dataset
+
+```
+!bash scripts/download-kitti-dataset.sh
+```
+
+#### Format Dataset as YOLOv5 Format
+
+as sayed before the data-set labels and images must be formated like the Yolo architecture works with.
+
+```
+!bash scripts/organize-dataset-format.sh
+```
+
+#### Generate CSV File
+
+generating csv files that the model will deal with that have some information about the training annotations
+
+```
+!python generate-csv.py --input=kitti-dataset/train_annots/ --filename=annotations.csv --results .
+```
+
+#### Training
+
+first you need to prerain the model on our dataset.
+
+```
+!python training_continuer.py --model models/model@1535477330.json --weights models/model@1535477330.h5 --results models/ --train train.csv --test test.csv
+```
+
+then you need to train the model another time to fine tuning the weights between training and testing dataset.
+
+```
+!python training_continuer.py --results models/ --train train.csv --test test.csv
+```
+
+#### Making Predictions
+
+```
+!python inference.py --data annotations.csv --model models/model@1535470106.json --weights models/model@1535470106.h5 --results .
+```
+
+#### Visualizing
+
+now you can see the predection result.
+
+```
+!python visualizer.py --data ../results/data/data.csv --frames ../object-detector/results/frames/ -fps 90 --results results
+```
+
+#### Results
+
+to see the model result graph write the upcomming model. 
+
+```
+from IPython.display import HTML
+from base64 import b64encode
+mp4 = open('results/output.mp4','rb').read()
+data_url = "data:video/mp4;base64," + b64encode(mp4).decode()
+HTML("""
+<video width=400 controls>
+      <source src="%s" type="video/mp4">
+</video>
+""" % data_url)
 ```
 
 
