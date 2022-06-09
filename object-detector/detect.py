@@ -39,9 +39,10 @@ import torch
 import torch.backends.cudnn as cudnn
 
 # define the name of the directory to be created
-
-
-with open('./results/data/data.csv', 'w', encoding='utf-8', newline='') as csvFile:
+os.mkdir('results/')
+os.mkdir('results/data/')
+os.mkdir('results/frames/')
+with open('results/data/data.csv', 'w', encoding='utf-8', newline='') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerow(['frame', 'xmin', 'ymin', 'xmax', 'ymax', 'scaled_xmin',
                     'scaled_ymin', 'scaled_xmax', 'scaled_ymax'])
@@ -185,23 +186,19 @@ def run(
                         originalvideoWidth = originalvideoSize[1]
                         imgHeight = im0.shape[0]
                         imgWidth = im0.shape[1]
-                        x1 = x1 / imgWidth
-                        x2 = x2 / imgWidth
-                        y1 = y1 / imgHeight
-                        y2 = y2 / imgHeight
-                        scaledX1 = x1 * originalvideoWidth
-                        scaledX2 = x2 * originalvideoWidth
-                        scaledY1 = y1 * originalvideoHieght
-                        scaledY2 = y2 * originalvideoHieght
+                        scaledX1 = (x1 / imgWidth) * originalvideoWidth
+                        scaledX2 = (x2 / imgWidth) * originalvideoWidth
+                        scaledY1 = (y1 / imgHeight) * originalvideoHieght
+                        scaledY2 = (y2 / imgHeight) * originalvideoHieght
                         csvRowList = [frame, x1, y1, x2, y2, scaledX1, scaledY1, scaledX2, scaledY2]
-                        with open('./results/data/data.csv', 'a') as csvFile:
+                        with open('results/data/data.csv', 'a') as csvFile:
                             writer = csv.writer(csvFile)
                             writer.writerow(csvRowList)
 
                         # confidence_score = conf
                         # class_index = cls
                         # object_name = names[int(cls)]
-                        cv2.imwrite('./results/frames/{0}.png'.format(frame), im0)
+                        cv2.imwrite('results/frames/{0}.png'.format(frame), im0)
 
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)

@@ -23,12 +23,12 @@ results_dir = args.results
 def main():
     # get data
     df_test = pd.read_csv(csvfile_path)
-    x_test = df_test[['xmin', 'ymin', 'xmax', 'ymax']].values
+    x_test = df_test[['scaled_xmin', 'scaled_ymin', 'scaled_xmax', 'scaled_ymax']].values
 
     # standardized data
     scalar = StandardScaler()
     x_test = scalar.fit_transform(x_test)
-    scalar.fit_transform((df_test[['ymax']].values - df_test[['ymin']])/3)
+    scalar.fit_transform((df_test[['scaled_ymax']].values - df_test[['scaled_ymin']])/3)
 
     # load json and create model
     json_file = open(model, 'r')
