@@ -118,6 +118,10 @@ plt.axis('off')
 ```
 [HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
+#### Code tutorial
+
+you can also visit obeject detection [tutorial](https://github.com/RmdanJr/vehicle-distance-estimation/blob/main/tutorials/object_detection.ipynb) 
+
 ### 2.2 Distance Estimation
 To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  
 
@@ -214,6 +218,9 @@ HTML("""
 
 [HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
+#### Code tutorial
+
+you can also visit distance estimation [tutorial](https://github.com/RmdanJr/vehicle-distance-estimation/blob/main/tutorials/distance_estimation.ipynb) 
 
 ## 3. Conclusion
 
