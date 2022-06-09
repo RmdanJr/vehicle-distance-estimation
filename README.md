@@ -101,9 +101,11 @@ The sheet is expected to have a row for each frame & a column for each category.
 !python display-examples.py
 ```
 
+[HASSAN](here is the place where is the images should be)
+
 #### Results
 
-to see the model results like reacal, precision metrics and object loss for testing and validating
+to see the model results like recall, precision metrics and object loss for testing and validating
 ```
 import cv2
 import matplotlib.pyplot as plt
@@ -114,6 +116,8 @@ img = cv2.imread('training-results/results.png', 1)
 plt.imshow(img)
 plt.axis('off')
 ```
+[HASSAN](here is the place where is the images should be)
+
 ### 2.2 Distance Estimation
 To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  
 
@@ -190,6 +194,8 @@ now you can see the predection result.
 !python visualizer.py --data ../results/data/data.csv --frames ../object-detector/results/frames/ -fps 90 --results results
 ```
 
+[HASSAN](here is the place where is the images should be)
+
 #### Results
 
 to see the model result graph write the upcomming model. 
@@ -206,6 +212,10 @@ HTML("""
 """ % data_url)
 ```
 
+[HASSAN](here is the place where is the images should be)
 
-## 3. conclusion
-## brief content about ther result (will aded later after the final testeing)
+
+## 3. Conclusion
+
+let's summarize what is the main idea and what we had used to work on it.
+we need to make object detection so we have used Yolov5 to have some annotations that needed to passed throug the distance estimation files to bound the the original images with bounding Boxes and passes the bounding boxes coordinates to deal with distance estimator to calculate the distance for the objects after traing the distance estimator and finally we make some predections and visulize them.
