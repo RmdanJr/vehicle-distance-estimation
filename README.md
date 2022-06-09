@@ -101,7 +101,7 @@ The sheet is expected to have a row for each frame & a column for each category.
 !python display-examples.py
 ```
 
-[HASSAN](here is the place where is the images should be)
+[HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
 #### Results
 
@@ -116,7 +116,7 @@ img = cv2.imread('training-results/results.png', 1)
 plt.imshow(img)
 plt.axis('off')
 ```
-[HASSAN](here is the place where is the images should be)
+[HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
 ### 2.2 Distance Estimation
 To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  
@@ -194,7 +194,7 @@ now you can see the predection result.
 !python visualizer.py --data ../results/data/data.csv --frames ../object-detector/results/frames/ -fps 90 --results results
 ```
 
-[HASSAN](here is the place where is the images should be)
+[HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
 #### Results
 
@@ -212,7 +212,7 @@ HTML("""
 """ % data_url)
 ```
 
-[HASSAN](here is the place where is the images should be)
+[HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
 
 
 ## 3. Conclusion
