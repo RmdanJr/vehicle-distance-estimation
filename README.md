@@ -1,44 +1,119 @@
-# distance and speed estimation
+# object detection & distance estimation
 ## 1. introduction - project description
-#### the project mainly is all about distance, speed estimation and, object detection using the thermal imaging, we are going here to build deep learning model that can do distance and speed estimation that works on photoes or videoes on thermal imaging.
+#### the project mainly is all about distance estimation and, object detection using the thermal imaging.
 for more details [the project text documentaion](https://docs.google.com/document/d/1ZbCR8RsUdPyrVYYg5FUxKb3aYmQieXIAirAn9aIEj7o/edit)
 
 ## 2.Usage
+first of all we need to clone the main repository```vehicle-distance-estimation``` using the upcomming command
+
+```
+!git clone https://github.com/RmdanJr/vehicle-distance-estimation.git
+```
+
+
 ### 2.1 object detection
-![sample of thermal object detection](https://user-images.githubusercontent.com/47370980/172619765-3ab6f4b2-49cd-41ad-a245-3ae385aa59b7.png)
+
+![object detection sample_1](https://user-images.githubusercontent.com/47370980/172878533-16ed416a-a51f-4929-ab17-b69ac912e631.jpg)
 
 we used YOLOv5 on the detecton YOLOv5 rocket is a family of object detection architectures and models pretrained on the COCO dataset.
 you can visit the formal docs [here](https://docs.ultralytics.com/#yolov5).
 we have made some modifications on YOLOv5 to be applicaple with our own dataset.
 
-first of all you need to dounload YOLOv5 and install the initial requirements.
+first you need to be inside the Yolo directory/folder
 ```
-git clone https://github.com/Ahmedabdelalem61/yolov5  # clone
-cd yolov5
-pip install -r requirements.txt  # install
+%cd vehicle-distance-estimation/object-detector/
 ```
-then if you need to train the model so you can run this command.
-#### note that 
-***dataset.yaml*** is a file inside the Yolo folder that have some specification like the path of your dataset labels && the dataset itself.
+#### Packages & Setup
 
-***yolov5s.yaml*** is a file also inside the Yolo folder that that all about the configrations of the models like the number of classes/objects the layers architecture
+installing the initial requirements.
 
-***weightsFile*** is the wights that the model should gives to me after the training but initialy should be dounloaded before the training if u need to dounload it from google drive you can write the upcomig command. you should now also that weghts specified on 3 classes initially that needed for our project
 ```
-import gdown
-gdown --id 1-4gQP0YzFkkYCZoCaIokl9eM94TaiVAu
+!pip install -r requirements.txt
 ```
+#### Preparing the requirement
+
 ```
-!python train.py --epochs 5 --data dataset.yaml --cfg yolov5s.yaml --weights weightsFile
+!python setup.py
+```
+#### Downloading the dataset
+
+you can click [here](https://www.kaggle.com/datasets/deepnewbie/flir-thermal-images-dataset) to work with FLIR Dataset  
+```
+!bash scripts/download-flir-dataset.sh
 ```
 
-then if you need to detect the images/videoes all what you can do is whriting the upcomming command.
-#### note that
-***weights*** is whare is the  file of the best weights after the training proccess happen.
+#### Formating the Dataset as YOLOv5 Format
 
-***source*** is the images path or specified videoes link or path
+yolo architecture depends on specific format for the dataset so you can use the follwoing comman to format it
 ```
-python detect.py --save-txt --weights /content/best.pt --conf 0.4 --source 'https://youtu.be/CvI5nvUdbsM'
+!python format-dataset.py
+```
+#### Fine-tuning YOLOv5s
+
+yolo have alot of models but here we will configure the the YOLOv5s model and yaml files
+
+
+first you need to configure the yaml file of the classes and the paths of trainig and validation
+so you can write the following command
+```
+!python create-yaml.py
+```
+#### Model's YAML Configuration File
+
+then you need to configure the configuration file that have the layres architecture.
+```
+!python configure-yolo-yaml.py
+```
+
+#### Training YOLOv5
+
+now you able to retrain the YOLO model on our dataset(flir)
+```
+!python train.py --epochs 2 --data dataset.yaml --cfg yolov5s.yaml
+```
+
+#### Downloading the trained wieghts
+
+ ```
+ !gdown --folder 10jpVGSHGILDt85QGf5KwHji0sUjZXbWR
+ ```
+ 
+ #### Detection
+ 
+ make some detection on images/videoes by
+ 
+ note that
+ (**best.pt** is the weights that we have dounladed but after training it on YoloV5s model)
+ 
+ ```
+ !python detect.py --save-txt --weights training-results/weights/best.pt --conf 0.4 --source 'https://youtu.be/CvI5nvUdbsM'
+ ```
+
+#### Generate Objects Coordinates Sheet
+
+The sheet is expected to have a row for each frame & a column for each category. Each cell must have all center coordinates of detected objects of the column (category) on the row (frame).
+```
+!python generate-coordinates-sheet.py
+```
+#### Detection Examples
+
+```
+!python display-examples.py
+
+```
+
+#### Results
+
+to see the model results like reacal, precision metrics and object loss for testing and validating
+```
+import cv2
+import matplotlib.pyplot as plt
+
+# display results image
+# imread() reads image as grayscale, second argument is one => grayscale, zero => RGB 
+img = cv2.imread('training-results/results.png', 1)
+plt.imshow(img)
+plt.axis('off')
 ```
 ### 2.2 distance estimation
 To make Distance estimation to objects (cars, pedestrians, bycycle) over the detection information you can use the ```distance-estimator```  all what you need is 
@@ -57,7 +132,6 @@ cd distance-estimator/
 python visualizer.py
 ```
 
-### 2.3 speed estimation
 
 ## 3. conclusion
 ## brief content about ther result (will aded later after the final testeing)
