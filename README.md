@@ -83,7 +83,7 @@ now you able to retrain the YOLO model on our dataset(flir)
  make some detection on images/videoes by
  
  note that
- (**best.pt** is the weights that we have dounladed but after training it on YoloV5s model)
+ **best.pt** is the weights that we have downladed but after training it on YoloV5s model
  
  ```
  !python detect.py --save-txt --weights training-results/weights/best.pt --conf 0.4 --source 'https://youtu.be/CvI5nvUdbsM'
