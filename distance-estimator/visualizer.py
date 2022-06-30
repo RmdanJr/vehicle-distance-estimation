@@ -11,6 +11,24 @@ import numpy as np
 import pandas as pd
 
 
+def draw_text(img, text,
+          font=cv2.FONT_HERSHEY_COMPLEX_SMALL,
+          pos=(0, 0),
+          font_scale=1,
+          font_thickness=1,
+          text_color=(255, 255, 255),
+          text_color_bg=(0, 0, 0)
+          ):
+
+    x, y = pos
+    text_size, _ = cv2.getTextSize(text, font, font_scale, font_thickness)
+    text_w, text_h = text_size
+    cv2.rectangle(img, pos, (x + text_w+2, y + text_h+2), text_color_bg, -1)
+    cv2.putText(img, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, font_thickness)
+
+    return text_size
+
+
 def write_predictions_on_frames(df):
     for idx, row in df.iterrows():
         fn = "{}.png".format(int(row['frame']))
@@ -21,8 +39,9 @@ def write_predictions_on_frames(df):
         y2 = int(row['ymax'])
         if os.path.exists(fp):
             im = cv2.imread(fp)
-            string = "({})".format(row['distance'])
-            cv2.putText(im, string, (x1, y1+20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            string = "{} meters".format(row['distance'])
+            fontface = cv2.FONT_HERSHEY_COMPLEX_SMALL
+            draw_text(im, string, fontface,  (x1+3, y1+3));
             cv2.imwrite(fn, im)
             cv2.waitKey(0)
         else:
@@ -32,6 +51,7 @@ def write_predictions_on_frames(df):
 def generate_video_from_frames():
     img_array = []
     imgs = glob.glob(os.path.join(frames_dir, '*.png'))
+    size = (360, 640)
     for filename in imgs:
         img = cv2.imread(filename)
         height, width, layers = img.shape
@@ -39,7 +59,7 @@ def generate_video_from_frames():
         img_array.append([int(filename.split('/')[-1].split('.')[0]), img])
     img_array.sort()
     out = cv2.VideoWriter(
-        "output.mp4", cv2.VideoWriter_fourcc(*'MP4V'), int(fps), size)
+        "output.mp4", cv2.VideoWriter_fourcc(*'mp4v'), int(fps), size)
     for i in range(len(img_array)):
         out.write(img_array[i][1])
     out.release()
