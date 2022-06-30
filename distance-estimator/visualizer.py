@@ -66,7 +66,7 @@ def generate_video_from_frames():
 
 
 argparser = argparse.ArgumentParser(
-    description='Generate annotations csv file from .txts')
+    description='visualize data from the dataframe')
 argparser.add_argument('-d', '--data', help='input data csv file path')
 argparser.add_argument(
     '-f', '--frames', help='input annotated video frames path')
