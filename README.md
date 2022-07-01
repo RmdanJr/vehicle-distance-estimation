@@ -115,7 +115,7 @@ img = cv2.imread('training-results/results.png', 1)
 plt.imshow(img)
 plt.axis('off')
 ```
-[HASSAN](https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiA7Mf86aD4AhXIwQIHHZtcBHUQPAgI)
+![trainnig_result](https://raw.githubusercontent.com/RmdanJr/vehicle-distance-estimation/main/object-detector/training-results/results.png)
 
 #### Code tutorial
 
