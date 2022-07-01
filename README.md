@@ -2,7 +2,7 @@
 
 The project is about vehicle object detection & distance estimation using thermal imaging.
 
-The main idea is to make object detection using Yolov5 after fine-tuning it on flir dataset to enable model to detect objects on thermal images and videos accuratly. Then using object detection results as an input to distance estimation model - trained on kitti dataset - we estimate the distance. Finally we visulize predictions.
+The main idea is to make object detection using Yolov5 after fine-tuning it on the FLIR dataset to enable the model to accurately detect objects on thermal images and videos. Then using object detection results as an input to the distance estimation model - trained on the KITTI dataset - we estimate the distance. Finally, we visualize predictions.
 
 ![distance_estimation_sample](https://user-images.githubusercontent.com/47370980/176803779-1c676b4a-5a89-4afc-b135-d4ac8ff6eaae.gif)
 
@@ -27,8 +27,8 @@ Detect objects on images/video frames.
 
 ##### Fine-tuning YOLOv5s
 
-- create yaml configuration file ```python create-yaml.py```
-- modify yolovs yaml file ```python configure-yolo-yaml.py```
+- create YAML configuration file ```python create-yaml.py```
+- modify yolovs YAML file ```python configure-yolo-yaml.py```
 - train model on our custom dataset ```python train.py --epochs 50 --data dataset.yaml --cfg yolov5s.yaml```
 
  #### Detection
@@ -40,12 +40,12 @@ Detect objects on images/video frames.
 
 #### Generate Objects Coordinates Sheet
 
-Frames on rows & classes on columns. Each cell have all center coordinates of the detected objects in frame on row from class on column.
+Frames on rows & classes on columns. Each cell has all center coordinates of the detected objects in a frame on a row from class on a column.
 
 - generate sheet from text labels ```python generate-coordinates-sheet.py```
 
 ### Distance Estimation
-Estimate distance of objects using object detection results.
+Estimate the distance of objects using object detection results.
 
 #### Setup
 
