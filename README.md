@@ -79,7 +79,7 @@ Estimate the distance of objects using object detection results.
 
 ## Appendices
 
-- [Docs](docs/GP-Paper.pdf)
-- [Tutorials](https://github.com/RmdanJr/vehicle-distance-estimation/blob/main/tutorials/)
+- [Docs](docs)
+- [Tutorials](tutorials)
 - [FLIR Dataset](https://www.kaggle.com/datasets/deepnewbie/flir-thermal-images-dataset)
 - [KITTI Dataset](http://www.cvlibs.net/datasets/kitti/)
